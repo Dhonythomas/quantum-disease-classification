@@ -22,10 +22,14 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         self,
         n_qubits: int = 4,
         n_layers: int = 2,
+        epochs: int = 20,
+        lr: float = 0.05,
         random_state: int = 42,
     ) -> None:
         self.n_qubits = n_qubits
         self.n_layers = n_layers
+        self.epochs = epochs
+        self.lr = lr
         self.random_state = random_state
 
         np.random.seed(self.random_state)
@@ -77,10 +81,12 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         self,
         X: np.ndarray,
         y: np.ndarray,
-        epochs: int = 20,
-        lr: float = 0.05,
+        epochs: Optional[int] = None,
+        lr: Optional[float] = None,
         batch_size: int = 16,
     ) -> Dict[str, List[float]]:
+        epochs = self.epochs if epochs is None else epochs
+        lr = self.lr if lr is None else lr
         """Trains the variational quantum parameters using mini-batch Adam optimization.
         
         Args:
