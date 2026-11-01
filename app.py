@@ -256,7 +256,7 @@ with tab2:
     if os.path.exists("reports/roc_comparison.png"):
         st.image("reports/roc_comparison.png", use_container_width=True)
     if os.path.exists("reports/benchmark_summary.md"):
-        with open("reports/benchmark_summary.md", "r") as f:
+        with open("reports/benchmark_summary.md", "r", encoding="utf-8") as f:
             st.markdown(f.read())
 
 with tab3:
