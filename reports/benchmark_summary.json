@@ -1,107 +1,107 @@
 {
   "QSVM": {
-    "accuracy": 0.88,
-    "precision": 0.875,
-    "recall": 0.9333333333333333,
-    "f1_score": 0.9032258064516129,
-    "malignant_sensitivity": 0.8,
-    "benign_sensitivity": 0.9333333333333333,
-    "roc_auc": 0.9533333333333334,
+    "accuracy": 0.9298245614035088,
+    "precision": 0.9571428571428572,
+    "recall": 0.9305555555555556,
+    "f1_score": 0.9436619718309859,
+    "malignant_sensitivity": 0.9285714285714286,
+    "benign_sensitivity": 0.9305555555555556,
+    "roc_auc": 0.968584656084656,
     "confusion_matrix": [
       [
-        8,
-        2
-      ],
-      [
-        1,
-        14
-      ]
-    ],
-    "train_time_sec": 0.1499,
-    "infer_time_sec": 0.044
-  },
-  "VQC": {
-    "accuracy": 0.88,
-    "precision": 0.8333333333333334,
-    "recall": 1.0,
-    "f1_score": 0.9090909090909091,
-    "malignant_sensitivity": 0.7,
-    "benign_sensitivity": 1.0,
-    "roc_auc": 1.0,
-    "confusion_matrix": [
-      [
-        7,
+        39,
         3
       ],
       [
-        0,
-        15
+        5,
+        67
       ]
     ],
-    "train_time_sec": 20.7068,
-    "infer_time_sec": 0.0952
+    "train_time_sec": 2.2243,
+    "infer_time_sec": 0.6423
+  },
+  "VQC": {
+    "accuracy": 0.9035087719298246,
+    "precision": 0.8674698795180723,
+    "recall": 1.0,
+    "f1_score": 0.9290322580645162,
+    "malignant_sensitivity": 0.7380952380952381,
+    "benign_sensitivity": 1.0,
+    "roc_auc": 0.9775132275132274,
+    "confusion_matrix": [
+      [
+        31,
+        11
+      ],
+      [
+        0,
+        72
+      ]
+    ],
+    "train_time_sec": 249.8495,
+    "infer_time_sec": 1.1254
   },
   "Classical_SVM": {
-    "accuracy": 0.96,
-    "precision": 1.0,
-    "recall": 0.9333333333333333,
+    "accuracy": 0.956140350877193,
+    "precision": 0.958904109589041,
+    "recall": 0.9722222222222222,
     "f1_score": 0.9655172413793104,
-    "malignant_sensitivity": 1.0,
-    "benign_sensitivity": 0.9333333333333333,
-    "roc_auc": 1.0,
+    "malignant_sensitivity": 0.9285714285714286,
+    "benign_sensitivity": 0.9722222222222222,
+    "roc_auc": 0.99239417989418,
     "confusion_matrix": [
       [
-        10,
-        0
+        39,
+        3
       ],
       [
-        1,
-        14
+        2,
+        70
       ]
     ],
-    "train_time_sec": 0.0032,
-    "infer_time_sec": 0.0002
+    "train_time_sec": 0.0123,
+    "infer_time_sec": 0.0011
   },
   "Logistic_Regression": {
-    "accuracy": 0.96,
-    "precision": 1.0,
-    "recall": 0.9333333333333333,
-    "f1_score": 0.9655172413793104,
-    "malignant_sensitivity": 1.0,
-    "benign_sensitivity": 0.9333333333333333,
-    "roc_auc": 1.0,
+    "accuracy": 0.956140350877193,
+    "precision": 0.9466666666666667,
+    "recall": 0.9861111111111112,
+    "f1_score": 0.9659863945578231,
+    "malignant_sensitivity": 0.9047619047619048,
+    "benign_sensitivity": 0.9861111111111112,
+    "roc_auc": 0.9930555555555556,
     "confusion_matrix": [
       [
-        10,
-        0
+        38,
+        4
       ],
       [
         1,
-        14
+        71
       ]
     ],
-    "train_time_sec": 0.0028,
-    "infer_time_sec": 0.0002
+    "train_time_sec": 0.0072,
+    "infer_time_sec": 0.0004
   },
   "Random_Forest": {
-    "accuracy": 0.88,
-    "precision": 1.0,
-    "recall": 0.8,
-    "f1_score": 0.8888888888888888,
-    "malignant_sensitivity": 1.0,
-    "benign_sensitivity": 0.8,
-    "roc_auc": 1.0,
+    "accuracy": 0.9210526315789473,
+    "precision": 0.9436619718309859,
+    "recall": 0.9305555555555556,
+    "f1_score": 0.9370629370629371,
+    "malignant_sensitivity": 0.9047619047619048,
+    "benign_sensitivity": 0.9305555555555556,
+    "roc_auc": 0.9869378306878307,
     "confusion_matrix": [
       [
-        10,
-        0
+        38,
+        4
       ],
       [
-        3,
-        12
+        5,
+        67
       ]
     ],
-    "train_time_sec": 0.0688,
-    "infer_time_sec": 0.004
+    "train_time_sec": 0.2111,
+    "infer_time_sec": 0.0098
   }
 }

@@ -134,9 +134,12 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
             mean_loss = float(np.mean(epoch_losses))
             history["loss"].append(mean_loss)
 
-            # Compute current training accuracy
-            preds = self.predict(X_arr)
-            acc = float(np.mean(preds == y_arr))
+            # Compute current training accuracy (only on final epoch or slice for speed)
+            if epoch == epochs - 1:
+                preds = self.predict(X_arr)
+                acc = float(np.mean(preds == y_arr))
+            else:
+                acc = float(np.mean(preds[:min(40, len(preds))] == y_arr[:min(40, len(preds))])) if 'preds' in locals() else 0.0
             history["accuracy"].append(acc)
 
         return history
@@ -155,3 +158,20 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         """Predicts binary class labels {0, 1}."""
         probs = self.predict_proba(X)
         return (probs[:, 1] >= 0.5).astype(int)
+
+    def save(self, filepath: str) -> None:
+        """Saves trained variational parameters to a .npz file."""
+        np.savez(
+            filepath,
+            weights=np.asarray(self.weights_),
+            bias=float(self.bias_),
+            n_qubits=self.n_qubits,
+            n_layers=self.n_layers,
+        )
+
+    def load(self, filepath: str) -> "VariationalQuantumClassifier":
+        """Loads trained variational parameters from a .npz file."""
+        data = np.load(filepath)
+        self.weights_ = pnp.array(data["weights"], requires_grad=True)
+        self.bias_ = pnp.array(float(data["bias"]), requires_grad=True)
+        return self
