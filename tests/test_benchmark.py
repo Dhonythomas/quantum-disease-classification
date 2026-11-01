@@ -57,3 +57,16 @@ def test_benchmark_runner_execution(tmp_path):
     
     assert os.path.exists(cm_path)
     assert os.path.exists(roc_path)
+
+def test_metrics_clinical_malignancy_sensitivity():
+    # 0 = Malignant, 1 = Benign
+    y_true = np.array([0, 0, 1, 1])
+    y_pred = np.array([0, 1, 1, 1])  # 1 true malignant, 1 false negative
+    
+    metrics = compute_classification_metrics(y_true, y_pred)
+    assert "malignant_sensitivity" in metrics
+    assert "benign_sensitivity" in metrics
+    # Recall for class 0 (Malignant) is 1/2 = 0.5
+    assert np.isclose(metrics["malignant_sensitivity"], 0.5)
+    # Recall for class 1 (Benign) is 2/2 = 1.0
+    assert np.isclose(metrics["benign_sensitivity"], 1.0)

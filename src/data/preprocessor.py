@@ -86,3 +86,18 @@ class DataPipeline:
             "y_train": y_train,
             "y_test": y_test,
         }
+
+    def transform(self, X: np.ndarray) -> np.ndarray:
+        """Transforms unseen raw clinical features through the fitted scaling and PCA pipeline.
+        
+        Args:
+            X: Array of shape (n_samples, 30) matching original clinical features.
+            
+        Returns:
+            Preprocessed array of shape (n_samples, n_components) bounded in [0, pi].
+        """
+        X_scaled = self.scaler.transform(X)
+        X_pca = self.pca.transform(X_scaled)
+        X_final = self.minmax_scaler.transform(X_pca)
+        return np.clip(X_final, 0.0, float(np.pi))
+

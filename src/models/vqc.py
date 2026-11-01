@@ -32,9 +32,9 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         self.lr = lr
         self.random_state = random_state
 
-        np.random.seed(self.random_state)
+        self.rng_ = np.random.default_rng(self.random_state)
         # Initialize variational weights: (n_layers, n_qubits, 2)
-        initial_weights = np.random.normal(
+        initial_weights = self.rng_.normal(
             loc=0.0,
             scale=0.1,
             size=(self.n_layers, self.n_qubits, 2),
@@ -85,8 +85,6 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         lr: Optional[float] = None,
         batch_size: int = 16,
     ) -> Dict[str, List[float]]:
-        epochs = self.epochs if epochs is None else epochs
-        lr = self.lr if lr is None else lr
         """Trains the variational quantum parameters using mini-batch Adam optimization.
         
         Args:
@@ -99,6 +97,8 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         Returns:
             Dictionary with training history ('loss' and 'accuracy').
         """
+        epochs = self.epochs if epochs is None else epochs
+        lr = self.lr if lr is None else lr
         X_arr = np.asarray(X, dtype=float)
         y_arr = np.asarray(y, dtype=int)
         n_samples = len(X_arr)
@@ -111,7 +111,7 @@ class VariationalQuantumClassifier(BaseEstimator, ClassifierMixin):
         bias = self.bias_
 
         for epoch in range(epochs):
-            indices = np.random.permutation(n_samples)
+            indices = self.rng_.permutation(n_samples)
             epoch_losses = []
 
             for start_idx in range(0, n_samples, effective_batch_size):

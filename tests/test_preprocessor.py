@@ -26,3 +26,14 @@ def test_data_pipeline_feature_names():
     feature_names = pipeline.get_feature_names()
     assert len(feature_names) == 30
     assert "mean radius" in feature_names
+
+def test_data_pipeline_transform_unseen():
+    pipeline = DataPipeline(n_components=4, random_state=42)
+    pipeline.fit_transform()
+    
+    # 2 raw samples with 30 features
+    X_raw_new = np.random.normal(10.0, 2.0, size=(2, 30))
+    X_proc = pipeline.transform(X_raw_new)
+    assert X_proc.shape == (2, 4)
+    assert np.all(X_proc >= -1e-6)
+    assert np.all(X_proc <= np.pi + 1e-6)

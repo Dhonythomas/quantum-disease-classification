@@ -36,6 +36,11 @@ def compute_classification_metrics(
     f1 = float(f1_score(y_true_arr, y_pred_arr, zero_division=0))
     cm = confusion_matrix(y_true_arr, y_pred_arr).tolist()
 
+    # Clinical specificity / sensitivity:
+    # Class 0: Malignant, Class 1: Benign
+    malignant_recall = float(recall_score(y_true_arr, y_pred_arr, pos_label=0, zero_division=0))
+    benign_recall = float(recall_score(y_true_arr, y_pred_arr, pos_label=1, zero_division=0))
+
     roc_auc = 0.5
     if y_proba is not None:
         proba_arr = np.asarray(y_proba)
@@ -54,6 +59,8 @@ def compute_classification_metrics(
         "precision": prec,
         "recall": rec,
         "f1_score": f1,
+        "malignant_sensitivity": malignant_recall,
+        "benign_sensitivity": benign_recall,
         "roc_auc": roc_auc,
         "confusion_matrix": cm,
     }
